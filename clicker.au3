@@ -14,15 +14,15 @@ Func BuggyWalk()
 EndFunc
 
 Func Plague()
-   ConsoleWrite("Plague")
+   ConsoleWrite("Plague\n")
    Sleep(1800)
    Send("1") ; Plague
-   Sleep(1000)
+   Sleep(500)
    Send("2")
 EndFunc
 
 Func Vampiric()
-   ConsoleWrite("Vampiric")
+   ConsoleWrite("Vampiric\n")
    Sleep(1800)
    Send("3") ; Vampiric touch
    Sleep(1200)
@@ -32,18 +32,21 @@ Func Vampiric()
 EndFunc
 
 Func ManaReg()
-   ConsoleWrite("ManaReg")
+   ConsoleWrite("ManaReg\n")
    Sleep(1800)
    Send("7") ; summon beast
-   Sleep(1000)
+   Sleep(1500)
    Send("6") ; toochka
-   Sleep(4800)
+   Sleep(6005)
+   Send("=") ; Berserk
+   Sleep(100)
+   Send("5") ; Renew Possibly Faded Pain
 Endfunc
 
 Func ShadowPriestDPS()
    Send("5") ; pain
    Sleep(1000)
-   $counter = 1
+   $counter = 41
    While not $trigger
 	  $counter = $counter + 1
 	  if Mod($counter, 10) == 0 Then
