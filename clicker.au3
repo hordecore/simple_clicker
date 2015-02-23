@@ -13,34 +13,52 @@ Func BuggyWalk()
     WEnd
 EndFunc
 
+Func Plague()
+   ConsoleWrite("Plague")
+   Sleep(1800)
+   Send("1") ; Plague
+   Sleep(1000)
+   Send("2")
+EndFunc
+
+Func Vampiric()
+   ConsoleWrite("Vampiric")
+   Sleep(1800)
+   Send("3") ; Vampiric touch
+   Sleep(1200)
+   Send("4") ; Mindblast
+   Sleep(1000)
+   Send("2")
+EndFunc
+
+Func ManaReg()
+   ConsoleWrite("ManaReg")
+   Sleep(1800)
+   Send("7") ; summon beast
+   Sleep(1000)
+   Send("6") ; toochka
+   Sleep(4800)
+Endfunc
+
 Func ShadowPriestDPS()
+   Send("5") ; pain
+   Sleep(1000)
+   $counter = 1
    While not $trigger
-	  if $counter % 10 == 0 Then
-		 Sleep(1800)
-		 Send("1") ; Plague
-		 Sleep(1000)
-		 Send("2")
+	  $counter = $counter + 1
+	  if Mod($counter, 10) == 0 Then
+		 Plague()
 		 ContinueLoop
 	  Endif
-	  if $counter % 10 == 5  Then
-		 Sleep(1800)
-		 Send("3") ; Vampiric touch
-		 Sleep(1200)
-		 Send("4") ; Mindblast
-		 Sleep(1000)
-		 Send("2")
+	  if Mod($counter, 10) == 5 Then
+		 Vampiric()
 		 ContinueLoop
 	  Endif
-	  if $counter % 65 == 0 Then
-		 Sleep(1800)
-		 Send("7") ; summon beast
-		 Sleep(1000)
-		 Send("6") ; toochka
-		 Sleep(6000)
-	  fi
+	  if Mod($counter, 65) == 1 Then
+		 ManaReg()
+	  Endif
 	  Sleep(1800)
 	  Send("2") ; Mind torture
-	  $counter = $counter + 1
     WEnd
 EndFunc
 
