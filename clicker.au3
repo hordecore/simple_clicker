@@ -5,7 +5,7 @@ HotKeySet("{F11}", "StartAutoSave")
 HotKeySet("{F10}", "PauseAutoSave")
 HotKeySet("{F9}", "Finish")
 
-Func BuggyWalk(counter)
+Func BuggyWalk()
     While not $trigger
 	  Send("{w down}")
 	  Sleep(40)
@@ -15,17 +15,31 @@ EndFunc
 
 Func ShadowPriestDPS()
    While not $trigger
-	  if $counter > 10 Then
-		 $counter = 0
-		 Send("1")
+	  if $counter % 10 == 0 Then
+		 Sleep(1800)
+		 Send("1") ; Plague
+		 Sleep(1000)
+		 Send("2")
+		 ContinueLoop
 	  Endif
-	  if $counter == 5 Then
-	  	Send("3")
-	  	Sleep(1200)
-	  	Send("4")
+	  if $counter % 10 == 5  Then
+		 Sleep(1800)
+		 Send("3") ; Vampiric touch
+		 Sleep(1200)
+		 Send("4") ; Mindblast
+		 Sleep(1000)
+		 Send("2")
+		 ContinueLoop
 	  Endif
+	  if $counter % 65 == 0 Then
+		 Sleep(1800)
+		 Send("7") ; summon beast
+		 Sleep(1000)
+		 Send("6") ; toochka
+		 Sleep(6000)
+	  fi
 	  Sleep(1800)
-	  Send("2")
+	  Send("2") ; Mind torture
 	  $counter = $counter + 1
     WEnd
 EndFunc
@@ -33,6 +47,7 @@ EndFunc
 Func StartAutoSave()
    $trigger = False
    ShadowPriestDPS()
+   ; BuggyWalk()
    Return
 EndFunc
 
