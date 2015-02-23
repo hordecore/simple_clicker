@@ -45,8 +45,7 @@ Endfunc
 
 Func ShadowPriestDPS()
    Send("5") ; pain
-   Sleep(1000)
-   $counter = 41
+   $counter = 1
    While not $trigger
 	  $counter = $counter + 1
 	  if Mod($counter, 10) == 0 Then
