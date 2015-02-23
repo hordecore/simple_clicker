@@ -32,6 +32,7 @@ EndFunc
 
 Func StartAutoSave()
    $trigger = False
+   ShadowPriestDPS()
    Return
 EndFunc
 
