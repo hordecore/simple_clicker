@@ -19,6 +19,7 @@ Func Plague()
    Send("1") ; Plague
    Sleep(500)
    Send("2")
+   Vampiric()
 EndFunc
 
 Func Vampiric()
