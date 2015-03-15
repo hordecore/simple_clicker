@@ -1,42 +1,39 @@
 Global $trigger = False
 Global $counter = 0
+Global $torture_speed = 1740
 
 HotKeySet("{F11}", "StartAutoSave")
 HotKeySet("{F10}", "PauseAutoSave")
 HotKeySet("{F9}", "Finish")
 
-Func BuggyWalk()
-    While not $trigger
-	  Send("{w down}")
-	  Sleep(40)
-	  Send("{w up}")
-    WEnd
-EndFunc
-
 Func Plague()
-   ConsoleWrite("Plague\n")
-   Sleep(1800)
+   ConsoleWrite("Plague ")
+   Sleep($torture_speed)
+   Send("8")
+   Sleep(50)б
    Send("1") ; Plague
-   Sleep(500)
+   Sleep(1050)
    Send("2")
    Vampiric()
 EndFunc
 
 Func Vampiric()
    ConsoleWrite("Vampiric\n")
-   Sleep(1800)
+   Sleep($torture_speed)
    Send("3") ; Vampiric touch
-   Sleep(1200)
+   Sleep(1050)
    Send("4") ; Mindblast
-   Sleep(1000)
+   Sleep(1050)
    Send("2")
 EndFunc
 
 Func ManaReg()
    ConsoleWrite("ManaReg\n")
-   Sleep(1800)
+   Sleep($torture_speed)
    Send("7") ; summon beast
-   Sleep(1500)
+   Sleep(200)
+   Send("1")
+   Sleep(1000)
    Send("6") ; toochka
    Sleep(6005)
    Send("=") ; Berserk
@@ -46,10 +43,12 @@ Endfunc
 
 Func ShadowPriestDPS()
    Send("5") ; pain
+   Sleep(1020)
+   Send("1")
    $counter = 1
    While not $trigger
 	  $counter = $counter + 1
-	  if Mod($counter, 10) == 0 Then
+	  if Mod($counter, 8) == 0 Then
 		 Plague()
 		 ContinueLoop
 	  Endif
@@ -57,10 +56,11 @@ Func ShadowPriestDPS()
 		 Vampiric()
 		 ContinueLoop
 	  Endif
-	  if Mod($counter, 65) == 1 Then
+	  if Mod($counter, 48) == 1 Then
 		 ManaReg()
+		 $counter = 1
 	  Endif
-	  Sleep(1800)
+	  Sleep($torture_speed)
 	  Send("2") ; Mind torture
     WEnd
 EndFunc
@@ -68,7 +68,6 @@ EndFunc
 Func StartAutoSave()
    $trigger = False
    ShadowPriestDPS()
-   ; BuggyWalk()
    Return
 EndFunc
 
