@@ -1,67 +1,80 @@
 Global $trigger = False
 Global $counter = 0
 Global $torture_speed = 1740
-
+Global $timer
 HotKeySet("{F11}", "StartAutoSave")
 HotKeySet("{F10}", "PauseAutoSave")
 HotKeySet("{F9}", "Finish")
 
-Func Plague()
-   ConsoleWrite("Plague ")
+Func _LOG($string)
+   ConsoleWrite(String(Int(TimerDiff($timer))))
+   ConsoleWrite(@TAB)
+   ConsoleWrite(String($counter))
+   ConsoleWrite(@TAB)
+   ConsoleWrite($string & @CRLF)
+EndFunc
+
+Func Torture()
+   _LOG("Torture")
+   Send("2") ; Mind torture
    Sleep($torture_speed)
+EndFunc
+
+Func Plague()
+   _LOG("Plague")
    Send("8")
-   Sleep(50)б
+   Sleep(50)
    Send("1") ; Plague
-   Sleep(1050)
-   Send("2")
-   Vampiric()
+   Sleep(1100)
 EndFunc
 
 Func Vampiric()
-   ConsoleWrite("Vampiric\n")
-   Sleep($torture_speed)
+   _LOG("Vampiric")
    Send("3") ; Vampiric touch
-   Sleep(1050)
+   Sleep(1100)
+   _LOG("Minblast")
    Send("4") ; Mindblast
-   Sleep(1050)
-   Send("2")
+   Sleep(1100)
 EndFunc
 
 Func ManaReg()
-   ConsoleWrite("ManaReg\n")
-   Sleep($torture_speed)
+   _LOG("ManaReg")
+   _LOG("beast")
    Send("7") ; summon beast
    Sleep(200)
-   Send("1")
-   Sleep(1000)
+   Plague()
+   _LOG("Toochka")
    Send("6") ; toochka
    Sleep(6005)
+   _LOG("Berserk")
    Send("=") ; Berserk
    Sleep(100)
+   _LOG("Pain")
    Send("5") ; Renew Possibly Faded Pain
 Endfunc
 
+
+
 Func ShadowPriestDPS()
+   $timer = TimerInit()
+   _LOG("Start")
+   _LOG("Pain")
    Send("5") ; pain
-   Sleep(1020)
+   Sleep(1050)
+   _LOG("Plauge")
    Send("1")
-   $counter = 1
    While not $trigger
 	  $counter = $counter + 1
-	  if Mod($counter, 8) == 0 Then
+	  if (Mod($counter, 8) == 0) and ($counter > 7) Then
 		 Plague()
-		 ContinueLoop
 	  Endif
-	  if Mod($counter, 10) == 5 Then
+	  if (Mod($counter, 5) == 0) and ($counter > 4) Then
 		 Vampiric()
-		 ContinueLoop
 	  Endif
-	  if Mod($counter, 48) == 1 Then
+	  if (Mod($counter, 54) == 1) and ($counter > 2) Then
 		 ManaReg()
-		 $counter = 1
 	  Endif
-	  Sleep($torture_speed)
-	  Send("2") ; Mind torture
+	  Torture()
     WEnd
 EndFunc
 
@@ -82,3 +95,5 @@ EndFunc
 While 1
    Sleep(100)
 WEnd
+
+;
