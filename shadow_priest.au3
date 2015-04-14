@@ -1,6 +1,6 @@
 Global $trigger = False
 Global $counter = 0
-Global $torture_speed = 1740
+Global $torture_speed = 1770
 Global $timer
 HotKeySet("{F11}", "StartAutoSave")
 HotKeySet("{F10}", "PauseAutoSave")
@@ -25,16 +25,16 @@ Func Plague()
    Send("8")
    Sleep(50)
    Send("1") ; Plague
-   Sleep(1100)
+   Sleep(1110)
 EndFunc
 
 Func Vampiric()
    _LOG("Vampiric")
    Send("3") ; Vampiric touch
-   Sleep(1100)
+   Sleep(1110)
    _LOG("Minblast")
    Send("4") ; Mindblast
-   Sleep(1100)
+   Sleep(1110)
 EndFunc
 
 Func ManaReg()
@@ -71,7 +71,7 @@ Func ShadowPriestDPS()
 	  if (Mod($counter, 5) == 0) and ($counter > 4) Then
 		 Vampiric()
 	  Endif
-	  if (Mod($counter, 54) == 1) and ($counter > 2) Then
+	  if (Mod($counter, 50) == 1) and ($counter > 2) Then
 		 ManaReg()
 	  Endif
 	  Torture()
@@ -95,5 +95,3 @@ EndFunc
 While 1
    Sleep(100)
 WEnd
-
-;
